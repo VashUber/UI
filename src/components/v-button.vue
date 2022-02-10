@@ -21,9 +21,8 @@
     font-size: 1rem;
     border-radius: 0.2em;
     box-sizing: border-box;
-    text-shadow: 0.2px 0.2px 0px #000;
-    -webkit-transition: box-shadow ease-in-out 0.25s;
-    transition: background 0.2s ease-in;
+    text-shadow: 0.3px 0.3px 0px #000;
+    transition: background ease-in 0.2s, box-shadow ease-in-out 0.25s;
 
     &:focus {
       box-shadow: 0px 0px 0px 3px rgba(164, 186, 245, 0.2);
