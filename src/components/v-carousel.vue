@@ -69,7 +69,7 @@
   .carousel {
     overflow: hidden;
     position: relative;
-
+    user-select: none;
     display: flex;
 
     &__button-img {
@@ -77,6 +77,10 @@
     }
 
     &__item {
+      max-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
     }
 

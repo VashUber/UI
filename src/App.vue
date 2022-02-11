@@ -21,38 +21,45 @@
       <h2 class="title">Carousel</h2>
       <v-carousel :CarouselItems="array">
         <template #item="{ item }">
-          <div
-            :style="{
-              width: '100%',
-              height: '400px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              background: 'tomato',
-              color: '#fff',
-            }"
-          >
-            <img :src="item" alt="" />
-          </div>
+          <img :src="item" alt="" :style="{ width: '100%', height: '600px' }" />
         </template>
       </v-carousel>
     </div>
     <div class="box">
       <h2 class="title">Modal</h2>
+      <v-button type="primary" @click.stop="toggleModal">
+        <template #text>Show modal</template>
+      </v-button>
+      <v-modal @closeModal="toggleModal" v-model="isShown">
+        <template #header>
+          <h2>Header</h2>
+        </template>
+        <template #content>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus
+          itaque vitae possimus praesentium. Facilis, harum esse. Quidem aperiam
+          amet, itaque in facilis ullam totam non similique commodi sed ab.
+        </template>
+      </v-modal>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref } from "vue"
+  import { nextTick, ref } from "vue"
   import vButton from "./components/v-button.vue"
   import vCarousel from "./components/v-carousel.vue"
+  import vModal from "./components/v-modal.vue"
 
   const counter = ref(0)
+  const isShown = ref(false)
   const array = ref([
     "https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_1280_webp_d2c5c86c5490d4e0fd4a25b44a40db97.webp",
     "https://icdn.lenta.ru/images/2021/01/20/16/20210120164051128/wide_4_3_ad0a8dedf4f24c1002d87743b6451b83.jpg",
   ])
+
+  const toggleModal = () => {
+    isShown.value = !isShown.value
+  }
 </script>
 
 <style lang="scss">
