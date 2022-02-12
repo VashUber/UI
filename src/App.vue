@@ -41,6 +41,10 @@
         </template>
       </v-modal>
     </div>
+    <div class="box">
+      <h2 class="title">Input</h2>
+      <v-input placeholder="Enter something..." type="text" v-model="input" />
+    </div>
   </div>
 </template>
 
@@ -49,6 +53,7 @@
   import vButton from "./components/v-button.vue"
   import vCarousel from "./components/v-carousel.vue"
   import vModal from "./components/v-modal.vue"
+  import vInput from "./components/v-input.vue"
 
   const counter = ref(0)
   const isShown = ref(false)
@@ -56,6 +61,7 @@
     "https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_1280_webp_d2c5c86c5490d4e0fd4a25b44a40db97.webp",
     "https://icdn.lenta.ru/images/2021/01/20/16/20210120164051128/wide_4_3_ad0a8dedf4f24c1002d87743b6451b83.jpg",
   ])
+  const input = ref("")
 
   const toggleModal = () => {
     isShown.value = !isShown.value

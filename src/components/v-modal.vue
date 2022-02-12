@@ -14,18 +14,13 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, defineEmits, defineProps, computed, watch } from "vue"
+  import { onMounted, ref, defineEmits, defineProps, watch } from "vue"
 
   const emits = defineEmits(["closeModal"])
   const { modelValue } = defineProps({ modelValue: Boolean })
 
-  const isShown = ref(false)
-
   const handleOutsideClick = (event) => {
-    if (!modal?.value.contains(event.target)) {
-      isShown.value = false
-      emits("closeModal")
-    }
+    if (!modal?.value.contains(event.target)) emits("closeModal")
   }
 
   const modal = ref(null)
@@ -74,12 +69,13 @@
 
   .modal-enter-active,
   .modal-leave-active {
-    transition: opacity 1s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     z-index: 0;
   }
 
   .modal-enter-from,
   .modal-leave-to {
-    opacity: -20;
+    transform: scale(1.1);
+    opacity: 0;
   }
 </style>
