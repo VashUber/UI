@@ -30,7 +30,7 @@
       <v-button type="primary" @click.stop="toggleModal">
         <template #text>Show modal</template>
       </v-button>
-      <v-modal @closeModal="toggleModal" v-model="isShown">
+      <v-modal v-model="isShown">
         <template #header>
           <h2>Header</h2>
         </template>

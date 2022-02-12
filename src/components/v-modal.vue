@@ -16,11 +16,11 @@
 <script setup>
   import { onMounted, ref, defineEmits, defineProps, watch } from "vue"
 
-  const emits = defineEmits(["closeModal"])
+  const emits = defineEmits(["update:modelValue"])
   const { modelValue } = defineProps({ modelValue: Boolean })
 
   const handleOutsideClick = (event) => {
-    if (!modal?.value.contains(event.target)) emits("closeModal")
+    if (!modal?.value.contains(event.target)) emits("update:modelValue", false)
   }
 
   const modal = ref(null)
@@ -70,7 +70,6 @@
   .modal-enter-active,
   .modal-leave-active {
     transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 0;
   }
 
   .modal-enter-from,
