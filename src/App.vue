@@ -43,7 +43,12 @@
     </div>
     <div class="box">
       <h2 class="title">Input</h2>
-      <v-input placeholder="Enter something..." type="text" v-model="input" />
+      <v-input
+        placeholder="Enter something..."
+        type="text"
+        v-model="input"
+        allowClear
+      />
     </div>
   </div>
 </template>

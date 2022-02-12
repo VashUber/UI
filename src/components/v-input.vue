@@ -1,26 +1,43 @@
 <template>
-  <input
-    :type="type"
-    :placeholder="placeholder"
-    class="input"
-    :value="modelValue"
-    @input="onInput($event)"
-  />
+  <div class="wrapper">
+    <input
+      :type="type"
+      :placeholder="placeholder"
+      class="input"
+      :value="modelValue"
+      @input="onInput($event)"
+      :class="{ 'input_with-clear': allowClear }"
+    />
+    <transition name="clear">
+      <div
+        v-if="allowClear && modelValue.length > 0"
+        @click="clearInput"
+        class="input__clear"
+      >
+        <img src="../assets/close.svg" alt="" />
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script setup>
   import { defineProps, defineEmits } from "vue"
 
-  const { type, placeholder, modelValue } = defineProps({
+  const { type, placeholder, modelValue, allowClear } = defineProps({
     type: String,
     placeholder: String,
     modelValue: String,
+    allowClear: Boolean,
   })
 
   const emits = defineEmits(["update:modelValue"])
 
   const onInput = (e) => {
     emits("update:modelValue", e.target.value)
+  }
+
+  const clearInput = () => {
+    emits("update:modelValue", "")
   }
 </script>
 
@@ -41,5 +58,44 @@
     &::placeholder {
       color: #bebebe;
     }
+
+    &_with-clear {
+      padding-right: 2.4rem;
+    }
+
+    &__clear {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(-50%, -50%);
+      margin-right: 0.25rem;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      background: #dadada;
+      cursor: pointer;
+
+      &:hover {
+        background: #bebebe;
+      }
+    }
+  }
+
+  .wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .clear-enter-active,
+  .clear-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .clear-enter-from,
+  .clear-leave-to {
+    opacity: 0;
   }
 </style>
