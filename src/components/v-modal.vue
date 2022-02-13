@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
-    <div class="modal" v-if="modelValue">
-      <div class="modal__container" ref="modal">
+    <div class="modal" v-if="modelValue" @click="close">
+      <div class="modal__container" ref="modal" @click.stop>
         <div class="modal__header">
           <slot name="header"></slot>
         </div>
@@ -14,23 +14,14 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, defineEmits, defineProps, watch } from "vue"
+  import { defineEmits, defineProps } from "vue"
 
   const emits = defineEmits(["update:modelValue"])
   const { modelValue } = defineProps({ modelValue: Boolean })
 
-  const handleOutsideClick = (event) => {
-    if (!modal?.value.contains(event.target)) emits("update:modelValue", false)
+  const close = () => {
+    emits("update:modelValue", false)
   }
-
-  const modal = ref(null)
-
-  onMounted(() => {
-    watch(modal, () => {
-      if (modal.value) window.addEventListener("click", handleOutsideClick)
-      else window.removeEventListener("click", handleOutsideClick)
-    })
-  })
 </script>
 
 <style lang="scss" scoped>
